@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "vota-ya-b135d"
+  },
+  "targets": {
+    "vota-ya-b135d": {
+      "hosting": {
+        "vota-ya": [
+          "vota-ya-b135d"
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,11 @@
+.content-opciones{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+
+}
+
+.img-options{
+    width: 400px;
+    height: 400px;
+}
