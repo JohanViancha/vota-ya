@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { Observable } from 'rxjs';
-import { opcionesVotacion } from '../interfaces/interface';
+import { Observable, of } from 'rxjs';
+import {tap } from 'rxjs/operators';
 
 
 
@@ -10,11 +10,24 @@ import { opcionesVotacion } from '../interfaces/interface';
 })
 export class VotaYaService {
 
+  private opcionesVotacion:any[] = [];
   constructor(private firestore:AngularFirestore){
 
   }
 
-  getVotacion():Observable<any>{
-    return this.firestore.collection('opcionesVoto').snapshotChanges();
+  getNominados():Observable<any>{
+
+      return this.firestore.collection('opcionesVoto').get()
+    
+ 
+  }
+
+  async votarPor(voto:any):Promise<any>{
+    voto={
+      ...voto,
+      votos:voto.votos+1
+    }
+    return await this.firestore.collection<any>('opcionesVoto').doc(voto.id).set(voto);
+
   }
 }

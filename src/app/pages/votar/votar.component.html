@@ -3,14 +3,14 @@
 
 <div class="row">
     <div class="col content-opciones">
-        <div class="card m-3 bg-dark" *ngFor="let opcion of opciones">
+        <div class="card m-3 bg-dark" *ngFor="let opcion of opcionesCandidatos">
             <img [src]="opcion.url" class="card-img-top img-fluid" alt="Imagen de las opciones a votar">
             <div class="card-body">
               <h5 class="card-title">{{opcion.name}}</h5>
               <p class="card-text">Clic aqui para votar por el juego</p>
             </div>
             <div class="card-footer">
-              <small class="text-muted">Last updated 3 mins ago</small>
+              <button (click)="votarPor(opcion)" class="btn btn-outline-primary btn-block">Votar</button>
             </div>
           </div>
     </div>
