@@ -1,4 +1,4 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { opcionesVotacion } from 'src/app/interfaces/interface';
 import { VotaYaService } from 'src/app/services/vota-ya.service';
 
@@ -7,23 +7,10 @@ import { VotaYaService } from 'src/app/services/vota-ya.service';
   templateUrl: './grafico-barra-horizontal.component.html',
   styleUrls: ['./grafico-barra-horizontal.component.css']
 })
-export class GraficoBarraHorizontalComponent implements OnDestroy {
+export class GraficoBarraHorizontalComponent implements  OnInit {
 
   opciones: opcionesVotacion[] = [];
-  results: any[] = [
-    {
-      "name": "Germany",
-      "value": 8940000
-    },
-    {
-      "name": "USA",
-      "value": 5000000
-    },
-    {
-      "name": "France",
-      "value": 7200000
-    }
-  ];
+  @Input() results: any[] = [];
   
 
   // options
@@ -40,19 +27,11 @@ export class GraficoBarraHorizontalComponent implements OnDestroy {
 
   intervalo:any=null;
 
-  constructor() {
-    this.intervalo = setInterval(()=>{
+  constructor(private _votaYa: VotaYaService) {
+    
 
-      const newResults = [...this.results];
-      for(let i in newResults){
-        newResults[i].value = Math.round(Math.random()*500+1);
-      }
-
-      this.results = [...newResults];
-    },1000);
   }
-  ngOnDestroy(): void {
-    clearInterval(this.intervalo);
+  ngOnInit(): void {
   }
 
   onSelect(event:any) {

@@ -23,11 +23,11 @@ export class VotaYaService {
   }
 
   async votarPor(voto:any):Promise<any>{
-    voto={
-      ...voto,
-      votos:voto.votos+1
-    }
-    return await this.firestore.collection<any>('opcionesVoto').doc(voto.id).set(voto);
+    await this.firestore.collection('opcionesVoto').doc(voto.id).get().subscribe((data:any)=>{
+      return this.firestore.collection<any>('opcionesVoto').doc(voto.id).update({votos:data.data().votos+1})
+    });
+
+
 
   }
 }
